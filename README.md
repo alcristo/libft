@@ -1,40 +1,116 @@
-*Este proyecto ha sido creado como parte del currículo de 42 por <alcristo>[Álvaro Cristóbal Olalla]*
+*This project has been created as part of the 42 curriculum by [alcristo](https://github.com/alcristo)*
 
 # Libft
 
-## DESCRIPCIÓN
+## Description
 
-Los proyectos de 42 tienen como objetivo que los estudiantes aprendan a crear código utilizando referencias y ayuda entre estudiantes. Las evaluaciones se hacen entre estudiantes sin importar el nivel entre examinador y defensor, de forma que el primero puede ayudar al segundo con su experiencia y viceversa.
+42 projects aim for students to create code using references and peer-to-peer learning. Evaluations are made between students no matter the level between reviewer and evaluated, so the former may help the latter with their experience if their level is higher and the latter may explain the former their code to the former.
 
-Este proyecto, denominado libft, consiste en la creación de una librería de funciones llamada "libft.a", la cual será extensible y se permitirá su uso en futuros proyectos. Dicha librería tiene como objetivo entender lo que hacen las funciones más elementales. Todas las funciones poseen el prefijo "ft_".
+This project consists of  creating a C functions library named `libft.a`, which may be extended and used in future projects. Such library aims students to understand how the most elementary functions work. All functions will have the `ft_` prefix.
 
-La librería libft se puede dividir en distintas secciones:
-- Funciones de libc: funciones básicas de libc, las cuales se encuenntran en el manual, creadas desde cero. Contiene las funciones isalpha, isdigit, isalnum, isascii, isprint, strlen, memset, bzero, memcpy, memmove, strlcpy, strlcat, toupper, tolower, strchr, strrchr, strncmp, memchr, memcmp, strnstr, atoi, calloc y strdup, todas ellas con el prefijo "ft_" delante para distinguirlas de sus contrapartes de libc.
-- Funciones adicionales: otras funciones útiles para futuros proyectos. Principalmente trabajan con cadenas de caracteres, que permiten encontrar subcadenas (substr), unir cadenas (strjoin), recortar por ambos lados un set de caracteres (strtrim), dividir una cadena por palabras (split), convertir un entero en cadena (itoa), aplicar una función a cada carácter creando una nueva cadena (strmapi) o directamente sobre la cadena (striteri) y escribir caracteres, cadenas con o sin salto de línea y enteros sobre un descriptor de archivo (putchar, putstr, putendl y putnbr, todas ellas con el sufijo "\_fd"). Todas estas funciones también poseen el prefijo "ft_".
-- Funciones de listas enlazadas: funciones que permiten trabajar con listas enlazadas. Pueden crear un nodo (lstnew), añadir uno a la cabeza (lstadd\_front) o a la cola (lstadd\_back), contar el número de nodos (lstsize), ir al último nodo de la lista (lstlast), eliminar un nodo (lstdelone) o toda la lista (lstclear) y aplicar funciones sobre la lista (lstiter) o creando una lista nueva (lstmap). De nuevo, todas las funciones tienen el prefijo "ft_".
+### Libc functions
 
-## INSTRUCCIONES
+All functions in this section have the same purpose as their `libc` counterparts, except for `isalpha`, `isdigit`, `isalnum`, `isascii` and `isprint`, which will return `1` if true. To see each function purpose, refer to the manual.
 
-Para crear la librería simplemente se tiene que escribir en el terminal el comando make junto con la regla all, siendo ésta opcional:
+| Function |
+| - |
+| `ft_isalpha` |
+| `ft_isdigit` |
+| `ft_isalnum` |
+| `ft_isascii` |
+| `ft_isprint` |
+| `ft_strlen` |
+| `ft_memset` |
+| `ft_bzero` |
+| `ft_memcpy` |
+| `ft_memmove` |
+| `ft_strlcpy` |
+| `ft_strlcat` |
+| `ft_toupper` |
+| `ft_tolower` |
+| `ft_strchr` |
+| `ft_strrchr` |
+| `ft_strncmp` |
+| `ft_memchr` |
+| `ft_memcmp` |
+| `ft_strnstr` |
+| `ft_atoi` |
+| `ft_calloc` |
+| `ft_strdup` |
+
+### Additional functions
+
+A set of useful functions. All functions allocate memory except fo the last four involving file descriptors.
+
+| Function | Definition | Description |
+| - | - | - |
+| `ft_substr` | `char *ft_substr(char const *s, unsigned int start, size_t len)` | Return a substring of `s` from `start` position with length `len` |
+| `ft_strjoin` | `char *ft_strjoin(char const *s1, char const *s2)` | Return the resulting string of appending `s2` to `s1` |
+| `ft_strtrim` | `char *ft_strtrim(const char *s1, const char *set)` | Return the result of stripping the set of characters `set` at the beginning and at the end of `s1` |
+| `ft_split` | `char **ft_split(char const *s, char c)` | Return an array of the strings that compose `s`, separated by `c` |
+| `ft_itoa` | `char *ft_itoa(int n)` | Return the string from `n` |
+| `ft_strmapi` | `char *ft_strmapi(const char *s, char (*f)(unsigned int, char))` | Return the resulting string of applying function `f` to each character of `s` |
+| `ft_striteri` | `void ft_striteri(char *s, void (*f)(unsigned int, char *))` | Apply function `f` to each character of `s` |
+| `ft_putchar_fd` | `void ft_putchar_fd(char c, int fd)` | Write character `c` in file descriptor `fd` |
+| `ft_putstr_fd` | `void ft_putstr_fd(char *s, int fd)` | Write string `s` in file descriptor `fd` |
+| `ft_putendl_fd` | `void ft_putendl_fd(char *s, int fd)` | Write string `s` followed by a newline in file descriptor `fd` |
+| `ft_putnbr_fd` | `void ft_putnbr_fd(int n, int fd)` | Write number `n` in file descriptor `fd` |
+
+### Linked lists
+
+Linked lists are data structures composed of nodes connecting another node. Such node is defined by:
+
+```c
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}
+```
+
+| Function | Definition | Description |
+| - | - | - |
+| `ft_lstnew` | `t_list *ft_lstnew(void *content)` | Allocate memory for a new node with content `content` |
+| `ft_lstadd_front` | `void ft_lstadd_front(t_list **lst, t_list *new)` | Add node `new` to the head of `lst` |
+| `ft_lstadd_back` | `void ft_lstadd_back(t_list **lst, t_list *new)` | Add node `new` to the tail of `lst` |
+| `ft_lstsize` | `int ft_lstsize(t_list *lst)` | Get the size of `lst` |
+| `ft_lstlast` | `t_list *ft_lstlast(t_list *lst)` | Get the last node of `lst` |
+| `ft_lstdelone` | `void ft_lstdelone(t_list *lst, void (*del)(void *))` | Delete the content of `lst` using `del` and free the node |
+| `ft_lstclear` | `void ft_lstclear(t_list **lst, void (*del)(void *))` | Delete the contents of `lst` and the subsequent nodes using `del` and free all nodes |
+| `ft_lstiter` | `void ft_lstiter(t_list *lst, void (*f)(void *))` | Apply function `f` to all contents in all nodes of `lst` |
+| `ft_lstmap` | `t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))` | Return resulting list of applying function `f` to all contents in all nodes of `lst`. Use `del` if memory allocation fails |
+
+## Instructions
+
+This project has a Makefile with the following rules:
+
+| Rule | Description |
+| - | - |
+| all | Compile the library |
+| clean | Remove temporary objects |
+| fclean | Remove temporary objects and library |
+| re | Remove temporary objects and library, then compile the library |
+
+To create the library, execute in terminal:
 
 ```bash
 make all
 ```
 
-Para eliminar los archivos temporales se utiliza la regla clean. Para eliminar también la librería simplemente hay que ejecutar la regla fclean. Finalmente, para hacer todo lo descrito en este párrafo y volver a crear la librería hay que ejeutar make con la regla re.
-
-Para utilizar la librería en un archivo .c únicamente hay que añadirle la librería:
+To compile `.c` files using the library, execute:
 
 ```bash
-[compilador] [-flags] libft.a [archivos.c]
+[compiler] [-flags] libft.a [files.c]
 ```
 
-## RECURSOS
+## Resources
 
-Se tomaron como referencia algunas funciones que hice durante la piscina de 42, así como otras, principalmente el Makefile, de la Piscine Reloaded.
+Several functions I did during the 42 piscine period were implemented, along with the Piscine Reloaded project.
 
-Debido a mi falta de entendimiento sobre la gestión de memoria con las funciones memcpy y memmove, la página web de Ana Martínez Aguilar (https://anamartinezaguilar.medium.com/funciones-para-copiar-vectores-en-c-memcpy-y-memmove-9ce124778801) me ayudó a comprender ambas funciones. No implementé el código hasta entender el correcto  funcionamiento de dichas funciones.
+[Ana Martínez Aguilar's web](https://anamartinezaguilar.medium.com/funciones-para-copiar-vectores-en-c-memcpy-y-memmove-9ce124778801) helped me understand memory management deeper for `memcpy` and `memmove`. No code was implemented until I understood how both functions worked.
 
-Se utilizó el programa "Francinette" (https://github.com/xicodomingues/francinette) para la comprobación del correcto funcionamiento de todas las funciones, así como para la gestión de fugas de memoria. También se discutió el código con otros compañeros, que ayudaron a encontrar errores.
+[Francinette](https://github.com/xicodomingues/francinette) was used to check the correct functioning of all functions, as well as memory leaks.
 
-No se ha utilizado inteligencia artificial para la elaboración de ninguna de las funciones de este proyecto, así como para el entendimiento del código y la corrección de errores..
+### AI usage
+
+AI wasn't used for this project: neither for the functions, nor for code understanding, nor for debugging.
